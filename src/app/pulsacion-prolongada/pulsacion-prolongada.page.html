@@ -1,0 +1,98 @@
+
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <!-- Botón de navegación -->
+    <ion-buttons slot="start">
+      <ion-menu-button menu="menu-lamimed">
+      </ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>
+      Pulsación Prolongada
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Tarjeta informativa -->
+  <ion-card>
+
+    <ion-card-header>
+      <ion-card-title>
+        LAMIMED Móvil
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Mantén presionado uno de los estudios
+      durante aproximadamente un segundo
+      para abrir un menú contextual.
+    </ion-card-content>
+
+  </ion-card>
+
+  <!-- Lista de estudios -->
+  <ion-card>
+
+    <ion-card-header>
+      <ion-card-title>
+        Estudios micológicos
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-list>
+
+        <ion-item
+          *ngFor="let estudio of estudios"
+          [color]="estudioSeleccionado === estudio ? 'success' : undefined"
+          (pointerdown)="iniciarPulsacion($event, estudio)"
+          (pointerup)="cancelarPulsacion()"
+          (pointerleave)="cancelarPulsacion()"
+          (pointercancel)="cancelarPulsacion()"
+          (contextmenu)="$event.preventDefault()">
+
+          <ion-label>
+            {{ estudio }}
+          </ion-label>
+
+        </ion-item>
+
+      </ion-list>
+
+      <p>
+        {{ mensaje }}
+      </p>
+
+    </ion-card-content>
+
+  </ion-card>
+
+  <!-- Menú contextual -->
+  <ion-alert
+    [isOpen]="mostrarMenuContextual"
+    header="Opciones del estudio"
+    [subHeader]="estudioSeleccionado"
+    message="Selecciona una acción para este estudio."
+    [buttons]="[
+      {
+        text: 'Ver información',
+        handler: verInformacion.bind(this)
+      },
+      {
+        text: 'Agregar a favoritos',
+        handler: marcarFavorito.bind(this)
+      },
+      {
+        text: 'Cancelar',
+        role: 'cancel'
+      }
+    ]"
+    (didDismiss)="cerrarMenu()">
+  </ion-alert>
+
+</ion-content>

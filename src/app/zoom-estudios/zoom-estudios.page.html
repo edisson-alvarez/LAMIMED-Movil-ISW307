@@ -1,0 +1,137 @@
+
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <!-- Botón del menú lateral -->
+    <ion-buttons slot="start">
+      <ion-menu-button menu="menu-lamimed">
+      </ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>Zoom de Estudios</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Tarjeta de presentación -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        LAMIMED Móvil
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Amplía o reduce la imagen de demostración
+      utilizando dos dedos.
+
+      También puedes probar los botones de zoom.
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Tarjeta del estudio -->
+  <ion-card>
+
+    <ion-card-header>
+      <ion-card-title>
+        Imagen de estudio micológico
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <!-- Zona del gesto Pinch/Zoom -->
+      <div
+        class="zona-zoom"
+        style="touch-action: none; overflow: hidden;"
+        (pointerdown)="iniciarGesto($event)"
+        (pointermove)="moverGesto($event)"
+        (pointerup)="terminarGesto($event)"
+        (pointercancel)="terminarGesto($event)"
+        (pointerleave)="terminarGesto($event)">
+
+        <div
+          class="imagen-estudio"
+          [style.transform]="'scale(' + escala + ')'">
+
+          <svg
+            viewBox="0 0 200 200"
+            xmlns="http://www.w3.org/2000/svg">
+
+            <rect
+              width="200"
+              height="200"
+              fill="#e4f1fa"/>
+
+            <circle
+              cx="100"
+              cy="100"
+              r="82"
+              fill="#c5e3ed"
+              stroke="#367b98"
+              stroke-width="4"/>
+
+            <g
+              stroke="#2c7389"
+              stroke-width="7"
+              fill="none"
+              stroke-linecap="round">
+
+              <path d="M45 145 L90 95 L135 60"/>
+              <path d="M90 95 L140 125"/>
+              <path d="M70 120 L48 85"/>
+              <path d="M115 78 L110 45"/>
+              <path d="M125 115 L155 95"/>
+
+            </g>
+
+            <g fill="#468fa2">
+              <circle cx="135" cy="60" r="11"/>
+              <circle cx="140" cy="125" r="10"/>
+              <circle cx="48" cy="85" r="9"/>
+              <circle cx="110" cy="45" r="9"/>
+              <circle cx="155" cy="95" r="9"/>
+            </g>
+
+          </svg>
+
+        </div>
+
+      </div>
+
+      <!-- Porcentaje de ampliación -->
+      <p class="indicador">
+        Nivel de zoom: {{ (escala * 100).toFixed(0) }}%
+      </p>
+
+      <!-- Controles -->
+      <div class="controles">
+
+        <ion-button (click)="aumentarZoom()">
+          Ampliar +
+        </ion-button>
+
+        <ion-button (click)="reducirZoom()">
+          Reducir -
+        </ion-button>
+
+        <ion-button
+          color="medium"
+          (click)="restablecerZoom()">
+          Restablecer
+        </ion-button>
+
+      </div>
+
+      <p>
+        Imagen ilustrativa para fines académicos.
+        No corresponde a una muestra clínica real.
+      </p>
+
+    </ion-card-content>
+
+  </ion-card>
+
+</ion-content>

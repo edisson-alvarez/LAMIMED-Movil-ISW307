@@ -1,0 +1,75 @@
+
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <!-- Botón del menú lateral -->
+    <ion-buttons slot="start">
+      <ion-menu-button menu="menu-lamimed">
+      </ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>Actualizar Estudios</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Gesto Pull-to-refresh -->
+  <ion-refresher
+    slot="fixed"
+    (ionRefresh)="actualizarEstudios($event)">
+
+    <ion-refresher-content
+      pullingText="Desliza hacia abajo"
+      refreshingSpinner="circles"
+      refreshingText="Actualizando estudios...">
+    </ion-refresher-content>
+
+  </ion-refresher>
+
+  <!-- Tarjeta informativa -->
+  <ion-card>
+
+    <ion-card-header>
+      <ion-card-title>
+        LAMIMED Móvil
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Desliza la pantalla hacia abajo
+      para actualizar la lista de estudios
+      micológicos.
+    </ion-card-content>
+
+  </ion-card>
+
+  <!-- Lista de estudios -->
+  <ion-card>
+
+    <ion-card-header>
+      <ion-card-title>
+        Estudios disponibles
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-list>
+
+        <ion-item *ngFor="let estudio of estudios">
+
+          <ion-label>
+            {{ estudio }}
+          </ion-label>
+
+        </ion-item>
+
+      </ion-list>
+
+    </ion-card-content>
+
+  </ion-card>
+
+</ion-content>
